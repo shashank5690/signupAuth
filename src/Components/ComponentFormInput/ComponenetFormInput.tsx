@@ -1,4 +1,4 @@
-// src/components/FormInput.tsx
+
 import React from 'react';
 import { TextInput, Text, View, StyleSheet, TextInputProps } from 'react-native';
 import { Controller, Control, FieldValues, FieldPath } from 'react-hook-form';
