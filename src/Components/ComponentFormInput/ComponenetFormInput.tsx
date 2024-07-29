@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { TextInput, Text, View, StyleSheet, TextInputProps } from 'react-native';
 import { Controller, Control, FieldValues, FieldPath } from 'react-hook-form';
+import styles from './ComponentFormInput';
 
 interface FormInputProps<T extends FieldValues> {
   control: Control<T>;
@@ -40,21 +40,5 @@ function FormInput<T extends FieldValues>({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 12,
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    paddingHorizontal: 8,
-  },
-  errorText: {
-    color: 'red',
-    marginTop: 4,
-  },
-});
 
 export default FormInput;

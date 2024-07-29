@@ -1,8 +1,6 @@
-// src/Screens/ScreenLogin/redux/authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { mmkv } from '../../../utils/Storage/mmkv';
+// import { mmkv } from '../../../utils/Storage/mmkv';
 
-// Define the shape of the authentication state
 interface AuthState {
   isAuthenticated: boolean;
   user: string | null;
@@ -13,7 +11,6 @@ const initialState: AuthState = {
   user: null,
 };
 
-// Define actions and reducers
 const authSlice = createSlice({
   name: 'auth',
   initialState,
