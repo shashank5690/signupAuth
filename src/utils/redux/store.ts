@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { createEpicMiddleware } from 'redux-observable';
 import rootReducer from './rootReducer';
 import { rootEpic } from './rootEpic';
 
@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
+      serializableCheck: false, // Important for handling non-serializable values in actions
     }).concat(epicMiddleware),
 });
 

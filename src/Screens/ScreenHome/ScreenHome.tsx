@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { View, Text, Button, BackHandler, Platform, Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { Props } from './utils/type/interfaces';
-import styles from './styleHome';
+import { useDispatch, useSelector } from 'react-redux';
+import { View, Text, Button, BackHandler, Platform, Alert, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
 import { logout } from '../ScreenLogin/redux/authSlice';
+import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice'; // Import the action
+import { RootState } from '../../utils/redux/rootReducer';
+import Card from './components/Card'; // Adjust the path according to your project structure
 
-const ScreenHome: React.FC<Props> = ({ navigation }) => {
+const ScreenHome: React.FC<{ navigation: any }> = ({ navigation }) => {
   const dispatch = useDispatch();
+  const { images, loading, error } = useSelector((state: RootState) => state.image);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -21,40 +23,80 @@ const ScreenHome: React.FC<Props> = ({ navigation }) => {
         [
           {
             text: 'Cancel',
-            onPress: () => null, // Do nothing if user cancels
+            onPress: () => null,
             style: 'cancel',
           },
           {
             text: 'OK',
-            onPress: () => BackHandler.exitApp(), // Exit the app if user confirms
+            onPress: () => BackHandler.exitApp(),
           },
         ],
         { cancelable: false }
       );
-      return true; // Prevent default behavior
+      return true;
     }
-    return false; 
+    return false;
   };
 
   useEffect(() => {
+    dispatch(fetchImagesRequest());
+
     BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
     };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+  }, []);
+
+  const renderItem = ({ item }: { item: any }) => (
+    <Card
+      imageUrl={item.webformatURL}
+      title={item.title}
+      likes={item.likes}
+      downloads={item.downloads}
+      views={item.views}
+      tags={item.tags}
+      onPress={() => { /* Handle card press */ }}
+    />
+  );
+
+  if (loading) return <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />;
+  if (error) return <Text style={styles.error}>{error}</Text>;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🎉 Congratulations!</Text>
-      <Text style={styles.subtitle}>You've unlocked the treasure! 🗝️</Text>
-      <Text style={styles.description}>
-        You’ve achieved something amazing. We hope you’re enjoying the rewards. 
-        Feel free to explore more features or log out if you’re done for today.
-      </Text>
-      <Button title="Logout" onPress={handleLogout} color="#FF6347" />
+      <Text style={styles.title}>Let's browse</Text>
+      <FlatList
+        data={images}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginVertical: 20,
+    alignSelf: 'flex-start',
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  error: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+});
 
 export default ScreenHome;
