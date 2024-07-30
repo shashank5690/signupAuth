@@ -3,52 +3,53 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#f5f5f5', // Light background for a modern look
+    padding: 20, // Slightly increased padding for better spacing
+    backgroundColor: '#E8F5E9', // Light green background to match the Home screen
     justifyContent: 'center', // Center content vertically
   },
   title: {
-    fontSize: 28,
+    fontSize: 30, // Increased font size for prominence
     marginBottom: 24,
     textAlign: 'center',
-    fontWeight: 'bold',
-    color: '#333', // Darker color for better readability
+    fontWeight: '700', // Bold weight for emphasis
+    color: '#2E7D32', // Dark green color for title
   },
   input: {
     height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 25, // Increased border radius
-    marginBottom: 16,
-    paddingHorizontal: 16, // Larger padding for better user experience
-    backgroundColor: '#fff', // White background for inputs
-    shadowColor: '#000', // Shadow for better visibility
+    borderColor: '#A5D6A7', // Light green border for consistency
+    borderWidth: 1.5,
+    borderRadius: 12, // Rounded corners for a modern look
+    marginBottom: 20, // Increased margin for better spacing
+    paddingHorizontal: 16,
+    backgroundColor: '#FFFFFF', // White background for inputs
+    shadowColor: '#000000', // Shadow for better visibility
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4, // Elevation for Android
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6, // Elevated shadow for Android
   },
   errorText: {
-    color: 'red',
-    marginBottom: 16,
+    color: '#D32F2F', // Red color for error messages
+    marginBottom: 20,
     textAlign: 'center',
+    fontSize: 16, // Increased font size for readability
   },
   button: {
     height: 50,
-    borderRadius: 25, // Larger border radius for buttons
-    backgroundColor: '#28a745', // Green color for the button
+    borderRadius: 12, // Rounded corners for a modern look
+    backgroundColor: '#4CAF50', // Green color for button, consistent with the theme
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000', // Shadow for button
+    shadowColor: '#000000', // Shadow for better visibility
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 12, // Elevation for Android
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 10, // Elevated shadow for Android
   },
   buttonText: {
-    color: '#fff', // White text color for contrast
+    color: '#FFFFFF', // White text color for contrast
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '700', // Bold weight for emphasis
   },
 });
 

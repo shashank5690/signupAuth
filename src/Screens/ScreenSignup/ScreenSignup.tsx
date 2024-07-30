@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput, Alert, TouchableOpacity } from 'react-na
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { mmkv } from '../../utils/Storage/mmkv';
-import styles from './ScreenSignup';
+import styles from './styleSignup';
 import { FormValues, RegisterScreenNavigationProp } from './utils/types/interfaces';
 import { schema } from './utils/schema/validation';
 
@@ -32,7 +32,8 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+      <Text style={styles.title}>Register👋
+      </Text>
       <Controller
         control={control}
         name="name"
