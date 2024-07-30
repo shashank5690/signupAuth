@@ -10,7 +10,6 @@ import { schema } from './utils/schema/validation';
 
 
 
-
 type ScreenLoginProps = {
   navigation: LoginScreenNavigationProp;
 };
