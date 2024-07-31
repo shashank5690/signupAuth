@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({ imageUrl, likes, downloads, views, tags = [
             <Text style={styles.stats}>{likes}</Text>
           </View>
           <View style={styles.statsItem}>
-            <DownloadIcon width={20} height={20} color="#000" />
+            <DownloadIcon width={20} height={20} color="#fff" />
             <Text style={styles.stats}>{downloads}</Text>
           </View>
           <View style={styles.statsItem}>

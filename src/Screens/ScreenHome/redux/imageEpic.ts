@@ -7,7 +7,7 @@ import { ImageHits } from '../utils/type/ImageState';
 
 
 // types of the action from the slice you are using this epic as directed
-export const imageEpic = (action$: Observable<ImageActions>): Observable<ImageActions> =>
+export const imageEpic = (action$: Observable<ImageActions>) =>
   action$.pipe(
     ofType(fetchImagesRequest.type),
     mergeMap(() =>

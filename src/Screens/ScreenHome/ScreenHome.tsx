@@ -69,7 +69,7 @@ const ScreenHome: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Let's browse</Text>
+      <Text style={styles.hometitle}>Let's browse</Text>
       <FlatList
         data={images}
         renderItem={renderItem}

@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // Important for handling non-serializable values in actions
+      serializableCheck: false, 
     }).concat(epicMiddleware),
 });
 
