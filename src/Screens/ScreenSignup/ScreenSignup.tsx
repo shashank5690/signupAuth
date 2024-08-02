@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Alert, TouchableOpacity, Image } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { mmkv } from '../../utils/Storage/mmkv';
@@ -32,8 +32,9 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register👋
-      </Text>
+      <Image source={require('../ScreenLogin/utils/Assets/star.png')} style={styles.headerImage} />
+      <Text style={styles.title}>Register👋</Text>
+      <Text style={styles.label}>Name</Text>
       <Controller
         control={control}
         name="name"
@@ -48,6 +49,8 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
         )}
       />
       {errors.name && <Text style={styles.errorText}>{errors.name.message}</Text>}
+
+      <Text style={styles.label}>Email</Text>
       <Controller
         control={control}
         name="email"
@@ -62,6 +65,8 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
         )}
       />
       {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
+
+      <Text style={styles.label}>Phone Number</Text>
       <Controller
         control={control}
         name="phone"
@@ -76,6 +81,8 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
         )}
       />
       {errors.phone && <Text style={styles.errorText}>{errors.phone.message}</Text>}
+
+      <Text style={styles.label}>Username</Text>
       <Controller
         control={control}
         name="username"
@@ -90,6 +97,8 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
         )}
       />
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
+
+      <Text style={styles.label}>Password</Text>
       <Controller
         control={control}
         name="password"
@@ -105,11 +114,25 @@ const ScreenRegister: React.FC<ScreenRegisterProps> = ({ navigation }) => {
         )}
       />
       {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
+
       <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>    
-        </View>
-        );
+        <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+
+      <View style={styles.socialMediaIcons}>
+        <Image source={require('../ScreenLogin/utils/Assets/google.png')} style={styles.socialIcon} />
+        <Image source={require('../ScreenLogin/utils/Assets/fb.png')} style={styles.socialIcon} />
+        <Image source={require('../ScreenLogin/utils/Assets/apple.png')} style={styles.socialIcon} />
+      </View>
+
+      <Text style={styles.registerPrompt}>
+        Already a member?{' '}
+        <Text style={styles.loginText} onPress={() => navigation.navigate('Login')}>
+          Log In
+        </Text>
+      </Text>
+    </View>
+  );
 };
 
 export default ScreenRegister;

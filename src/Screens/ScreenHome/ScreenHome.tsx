@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, Button, BackHandler, Platform, Alert, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
 import { logout } from '../ScreenLogin/redux/authSlice';
-import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice'; // Import the action
+import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice'; 
 import { RootState } from '../../utils/redux/rootReducer';
-import Card from './components/Card'; // Adjust the path according to your project structure
+import Card from './components/Card'; 
+import { ImageHits } from './utils/type/ImageState';
+import { ListRenderItemInfo } from 'react-native';
+import styles from './styleHome';
 
 const ScreenHome: React.FC<{ navigation: any }> = ({ navigation }) => {
   const dispatch = useDispatch();
+  //object destructed the images, errors, loading state from the store
   const { images, loading, error } = useSelector((state: RootState) => state.image);
 
   const handleLogout = () => {
@@ -41,31 +45,31 @@ const ScreenHome: React.FC<{ navigation: any }> = ({ navigation }) => {
   useEffect(() => {
     dispatch(fetchImagesRequest());
 
-    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    const backHandlerListener = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+      backHandlerListener.remove();
     };
-  }, []);
+  }, [dispatch]);
+  
 
-  const renderItem = ({ item }: { item: any }) => (
+  //ListRenderItemInfo used here for better typesafety and correct data type
+  const renderItem = ({ item }: ListRenderItemInfo<ImageHits>) => (
     <Card
       imageUrl={item.webformatURL}
-      title={item.title}
       likes={item.likes}
       downloads={item.downloads}
       views={item.views}
       tags={item.tags}
-      onPress={() => { /* Handle card press */ }}
-    />
+      onPress={() => { } } title={''}    />
   );
-
+  
   if (loading) return <ActivityIndicator size="large" color="#0000ff" style={styles.loader} />;
   if (error) return <Text style={styles.error}>{error}</Text>;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Let's browse</Text>
+      <Text style={styles.hometitle}>Let's browse</Text>
       <FlatList
         data={images}
         renderItem={renderItem}
@@ -75,28 +79,5 @@ const ScreenHome: React.FC<{ navigation: any }> = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#f0f0f0',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginVertical: 20,
-    alignSelf: 'flex-start',
-  },
-  loader: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  error: {
-    color: 'red',
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 20,
-  },
-});
 
 export default ScreenHome;
